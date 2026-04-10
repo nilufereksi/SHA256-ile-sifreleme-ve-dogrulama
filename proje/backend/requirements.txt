@@ -1,7 +1,0 @@
-fastapi
-uvicorn
-openai==0.28
-easyocr
-Pillow
-numpy
-python-multipart
