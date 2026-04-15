@@ -1,0 +1,10 @@
+# Ses ve UI Kütüphaneleri
+customtkinter==5.2.2
+numpy
+librosa
+scipy
+sounddevice
+pyaudio
+
+# Kriptografi
+pycryptodome

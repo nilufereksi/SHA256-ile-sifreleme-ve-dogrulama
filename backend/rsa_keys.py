@@ -1,7 +1,12 @@
 from Crypto.PublicKey import RSA
 import os
 
-def anahtar_uret(isim="default", klasor=r"C:\Users\h\Desktop\staj\Yeni klasör\anahtarlar"):
+# --- DİNAMİK ANAHTAR KLASÖRÜ ---
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+ANAHTAR_DIR = os.path.join(PROJECT_DIR, "anahtarlar")
+os.makedirs(ANAHTAR_DIR, exist_ok=True)  # klasörü oluştur
+
+def anahtar_uret(isim="default", klasor=ANAHTAR_DIR):
     """Anahtar üret ve verilen klasöre kaydet"""
     os.makedirs(klasor, exist_ok=True)  # klasörü oluştur
     key = RSA.generate(2048)
@@ -20,11 +25,11 @@ def anahtar_uret(isim="default", klasor=r"C:\Users\h\Desktop\staj\Yeni klasör\a
 
     print(f"Anahtarlar üretildi: {private_path}, {public_path}")
 
-def yukle_kamu(isim="default", klasor=r"C:\Users\h\Desktop\staj\Yeni klasör\anahtarlar"):
+def yukle_kamu(isim="default", klasor=ANAHTAR_DIR):
     """Public key yükle"""
     return RSA.import_key(open(os.path.join(klasor, f"{isim}_public.pem"), "rb").read())
 
-def yukle_ozel(isim="default", klasor=r"C:\Users\h\Desktop\staj\Yeni klasör\anahtarlar"):
+def yukle_ozel(isim="default", klasor=ANAHTAR_DIR):
     """Private key yükle"""
     return RSA.import_key(open(os.path.join(klasor, f"{isim}_private.pem"), "rb").read())
 

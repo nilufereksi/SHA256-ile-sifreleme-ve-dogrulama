@@ -1,0 +1,61 @@
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.whl
+
+# ── Virtual Environment ────────────────────────────────────────────────────────
+venv/
+.venv/
+env/
+.env/
+
+# ── RSA Anahtarları (Hassas) ───────────────────────────────────────────────────
+backend/anahtarlar/
+keys/
+*.pem
+
+# ── Sunucu Verileri (Kayıtlı Hash'ler) ────────────────────────────────────────
+backend/server_data/
+backend/haberler/
+server_data/
+haberler/
+
+# ── Ses Dosyaları ─────────────────────────────────────────────────────────────
+*.wav
+*.mp3
+*.ogg
+*.flac
+
+# ── Geçici / Yerel Dosyalar ────────────────────────────────────────────────────
+bob_verisi.txt
+*.bin
+*.bak
+*.tmp
+*.log
+
+# ── IDE / Editor ──────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ── Test Çıktıları ─────────────────────────────────────────────────────────────
+.pytest_cache/
+.mypy_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# ── Jupyter ───────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/

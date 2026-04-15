@@ -7,8 +7,16 @@ from rsa_keys import (
     public_key_fingerprint
 )
 
-HABER_DOSYASI = r"C:\Users\h\Desktop\staj\Yeni klasör\veriler\haber.txt"
-HASH_DOSYASI = r"C:\Users\h\Desktop\staj\Yeni klasör\veriler\haber_hash.txt"  # şifreli hash burada saklanacak
+# --- DİNAMİK DOSYA YOLLARI ---
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+VERILER_DIR = os.path.join(PROJECT_DIR, "veriler")
+
+# "veriler" klasörü yoksa oluştur (hata önler)
+os.makedirs(VERILER_DIR, exist_ok=True)
+
+# Dosya yollarını oluştur
+HABER_DOSYASI = os.path.join(VERILER_DIR, "haber.txt")
+HASH_DOSYASI = os.path.join(VERILER_DIR, "haber_hash.txt")  # şifreli hash burada saklanacak
 
 def haber_hash_olustur(haber_dosyasi=HABER_DOSYASI, alici="bob"):
     if not os.path.exists(haber_dosyasi):

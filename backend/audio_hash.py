@@ -6,18 +6,18 @@ def oku_ve_hash_al(dosya_adi="kayit.wav"):
         frames = wav_file.readframes(wav_file.getnframes())
         byte_data = bytearray(frames)
         
-    print(f"Toplam byte uzunluğu: {len(byte_data)}")
+    print(f"Toplam byte uzunlugu: {len(byte_data)}")
     
     hash_listesi = []
 
     for i in range(0, len(byte_data), 8):
         parca = byte_data[i:i+8]
         if len(parca) < 8:
-            break  # son parça eksikse alma
+            break  # son parca eksikse alma
         sha = hashlib.sha256(parca).digest()
         hash_listesi.append(sha)
 
-    print(f"{len(hash_listesi)} adet 8 byte'lık hash üretildi.")
+    print(f"{len(hash_listesi)} adet 8 byte'lik hash uretildi.")
     return hash_listesi
 
 import hashlib
@@ -43,7 +43,7 @@ def hash_text_file(file_path):
         with open(file_path, "rb") as f:  # binary oku
             content = f.read()
 
-        # İçeriği 8 byte'lık bloklara böl
+        # Icerigi 8 byte'lik bloklara bol
         for i in range(0, len(content), 8):
             block = content[i:i+8]
             if len(block) < 8:
@@ -51,15 +51,10 @@ def hash_text_file(file_path):
             h = hashlib.sha256(block).digest()
             hashes.append(h)
 
-        print(f"[DEBUG] {file_path}: {len(hashes)} hash üretildi.")
+        print(f"[DEBUG] {file_path}: {len(hashes)} hash uretildi.")
         return hashes
 
     except Exception as e:
-        print(f"[ERROR] {file_path} hash alınırken hata: {e}")
+        print(f"[ERROR] {file_path} hash alinirken hata: {e}")
         return []
 
-from audio_hash import hash_text_file
-
-hashes = hash_text_file("haber1.txt")
-print("Toplam hash:", len(hashes))
-print("İlk hash:", hashes[0].hex() if hashes else "YOK")

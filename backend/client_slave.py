@@ -1,4 +1,4 @@
-# client_slave.py (düzeltilmiş)
+# client_slave.py (duzeltilmis)
 import os
 import sys
 import socket
@@ -27,7 +27,7 @@ def recv_exact(sock, n):
     while len(data) < n:
         chunk = sock.recv(n - len(data))
         if not chunk:
-            raise ConnectionError("Bağlantı kesildi.")
+            raise ConnectionError("Baglanti kesildi.")
         data += chunk
     return data
 
@@ -54,7 +54,7 @@ def get_hashes_from_fresh_record(seconds=3, wav_name="kayit.wav") -> List[bytes]
     hashes = hash_blocks(blocks)
     return hashes
 
-# --- Haber modülü (düzeltilmiş) ---
+# --- Haber modulu (duzeltilmis) ---
 def get_news_hashes_from_file(file_path: str) -> List[bytes]:
     import hashlib, os
 
@@ -68,21 +68,19 @@ def get_news_hashes_from_file(file_path: str) -> List[bytes]:
 
         for i in range(0, len(content), 8):
             block = content[i:i+8]
-            if len(block) < 8:
-                continue
             h = hashlib.sha256(block).digest()
             hashes.append(h)
 
         if hashes:
-            print(f"[DEBUG] {file_path}: {len(hashes)} hash üretildi.")
-            print(f"İlk hash: {hashes[0].hex()[:16]}...")
+            print(f"[DEBUG] {file_path}: {len(hashes)} hash uretildi.")
+            print(f"Ilk hash: {hashes[0].hex()[:16]}...")
         else:
-            print(f"[DEBUG] {file_path}: hiç hash üretilemedi.")
+            print(f"[DEBUG] {file_path}: hic hash uretilemedi.")
 
         return hashes
 
     except Exception as e:
-        print(f"[ERROR] {file_path} hash alınırken hata: {e}")
+        print(f"[ERROR] {file_path} hash alinirken hata: {e}")
         return []
 
 
@@ -93,12 +91,12 @@ def get_news_hashes_from_files(file_list: List[str]) -> List[bytes]:
         all_hashes.extend(get_news_hashes_from_file(file))
     return all_hashes
 
-# ----- Yeni: iki haber dosyasını bir payload'ta paketleme -----
+# ----- Yeni: iki haber dosyasini bir payload'ta paketleme -----
 def build_two_file_payload(list_a: List[bytes], list_b: List[bytes]) -> bytes:
     return pack_hashes(list_a) + pack_hashes(list_b)
 
 # ----------------------------------------------------------------
-# Client-side run function (GUI burayı çağıracak)
+# Client-side run function (GUI burayi cagiracak)
 # ----------------------------------------------------------------
 def run_client(mode: str, args) -> Tuple[bool, str]:
     """
@@ -120,6 +118,8 @@ def run_client(mode: str, args) -> Tuple[bool, str]:
         if not file_list:
             return False, "No news files provided"
         hashes = get_news_hashes_from_files(file_list)
+        if not hashes:
+            return False, "Secilen dosya bos (0 byte) veya okunamadi!"
         msg_type = 3 if mode == "news-enroll" else 4
         plaintext = pack_hashes(hashes)
 
@@ -166,23 +166,57 @@ def run_client(mode: str, args) -> Tuple[bool, str]:
 
 
 # ----------------------------------------------------------------
-# CLI compatibility (eski kullanım korunur)
+# CLI compatibility (eski kullanim korunur)
 # ----------------------------------------------------------------
 def main():
     if len(sys.argv) < 2:
-        print("Kullanım: python client_slave.py enroll|verify|news-enroll|news-verify|news-compare [dosyalar/süre]")
+        print("Kullanim: python client_slave.py enroll|verify|news-enroll|news-verify|news-compare [dosyalar/sure]")
         return
 
     mode = sys.argv[1]
     if mode in ("enroll", "verify"):
         seconds = int(sys.argv[2]) if len(sys.argv) > 2 else 3
         ok, msg = run_client(mode, seconds)
-        print((" OK" if ok else " FAIL"), msg)
+        if mode == "enroll":
+            if ok:
+                print(f"[OK] Ses ornegi basariyla kaydedildi.")
+            else:
+                print(f"[HATA] Ses kaydi basarisiz: {msg}")
+        else: # verify
+            if ok:
+                print(f"[OK] DOGRULAMA BASARILI: Ses eslesiyor!")
+            else:
+                print(f"[HATA] DOGRULAMA BASARISIZ: Ses uyusmuyor!")
+            print(f"Detay: {msg}")
 
-    elif mode in ("news-enroll", "news-verify"):
+    elif mode == "news-enroll":
         file_list = sys.argv[2:]
         ok, msg = run_client(mode, file_list)
-        print((" OK" if ok else " FAIL"), msg)
+        if ok:
+            print("\n" + "="*45)
+            print("[OK] HABER BASARIYLA SISTEME KAYDEDILDI!")
+            print("Bu metin orijinal kaynak olarak referans alinacaktir.")
+            print(f"(Sistem Yaniti: {msg})")
+            print("="*45 + "\n")
+        else:
+            print(f"\n[HATA] KAYIT BASARISIZ: {msg}\n")
+
+    elif mode == "news-verify":
+        file_list = sys.argv[2:]
+        ok, msg = run_client(mode, file_list)
+        print("\n" + "="*45)
+        if ok:
+            print("[OK] SONUC: DOGRULAMA BASARILI!")
+            print("Iki haber metni tamamen birbiriyle eslesiyor.")
+            print("Sonradan yuklenen haber ORIJINAL ve icerigi degistirilmemis.")
+        else:
+            print("[HATA] SONUC: DOGRULAMA BASARISIZ!")
+            print("Iki haber metni birbirinden FARKLI!")
+            print("2. haber ORIJINAL DEGIL veya uzerinde degisiklik (manipulasyon) yapilmis.")
+        
+        print("-" * 45)
+        print(f"Karsilastirma Detayi: {msg}")
+        print("="*45 + "\n")
 
     elif mode == "news-compare":
         if len(sys.argv) < 4:
@@ -191,10 +225,16 @@ def main():
         fileA = sys.argv[2]
         fileB = sys.argv[3]
         ok, msg = run_client("news-compare", (fileA, fileB))
-        print((" OK" if ok else " FAIL"), msg)
+        print("\n" + "="*45)
+        if ok:
+            print("[OK] SONUC: ESLESTI! Her iki haber dosyasi da birebir ayni.")
+        else:
+            print("[HATA] SONUC: FARKLI! Supheli metinler birbirleriyle uyusmuyor.")
+        print(f"Detay: {msg}")
+        print("="*45 + "\n")
 
     else:
-        print("Geçersiz mod.")
+        print("Gecersiz mod.")
 
 
 if __name__ == "__main__":
