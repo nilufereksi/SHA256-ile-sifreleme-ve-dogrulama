@@ -3,6 +3,7 @@
 
 <img width="800" height="476" alt="hashverify github" src="https://github.com/user-attachments/assets/b46b5361-58f0-4021-9714-0bc96edf3060" />
 
+
 **SHA-256 tabanlı haber ve ses bütünlük doğrulama sistemi.**
 
 HashVerify, bir metin haberinin veya ses kaydının orijinalliğini SHA-256 kriptografik hash'leri ve RSA şifreleme kullanarak doğrulayan bir masaüstü güvenlik uygulamasıdır. İçerik bir kez sisteme kaydedilir (enroll); sonraki doğrulama adımında hash'ler karşılaştırılarak manipülasyon anında tespit edilir.
