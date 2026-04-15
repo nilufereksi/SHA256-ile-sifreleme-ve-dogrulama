@@ -1,6 +1,6 @@
 # HashVerify 🔐- **SHA-256 tabanlı haber ve ses bütünlük doğrulama**
 
-
+ 
 <img width="800" height="476" alt="hashverify github" src="https://github.com/user-attachments/assets/b46b5361-58f0-4021-9714-0bc96edf3060" />
 
 
