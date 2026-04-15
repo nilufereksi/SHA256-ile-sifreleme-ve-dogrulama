@@ -1,5 +1,12 @@
 # HashVerify 🔐
 
+
+<img width="800" height="476" alt="hashverify github" src="https://github.com/user-attachments/assets/b46b5361-58f0-4021-9714-0bc96edf3060" />
+
+
+SHA-256 tabanlı hashleme ve blok bazlı analiz kullanarak ses kayıtları ile metin dosyalarının bütünlüğünü ve doğruluğunu istemci-sunucu mimarisi üzerinden doğrulayan bir sistemdir. AES-GCM ve RSA ile güvenli veri iletimi sağlanarak, hem biyometrik (ses) hem de içerik (haber) doğrulama süreçleri güvenli ve karşılaştırmalı olarak gerçekleştirilir.
+
+
 **SHA-256 tabanlı haber ve ses bütünlük doğrulama sistemi.**
 
 HashVerify, bir metin haberinin veya ses kaydının orijinalliğini SHA-256 kriptografik hash'leri ve RSA şifreleme kullanarak doğrulayan bir masaüstü güvenlik uygulamasıdır. İçerik bir kez sisteme kaydedilir (enroll); sonraki doğrulama adımında hash'ler karşılaştırılarak manipülasyon anında tespit edilir.
@@ -132,8 +139,9 @@ Uygulama üç sekmeye ayrılmıştır:
 
 > Orijinal haber dosyası sisteme kaydedildikten sonra aynı dosya ile doğrulama yapıldığında tüm hash blokları eşleşir.
 
-<!-- SCREENSHOT_SAME: Terminalde veya GUI'de "DOGRULAMA BASARILI / SAME" çıktısının görüntüsü -->
-![Hash Eşleşme - Başarılı](screenshots/hash_same.png)
+<!-- SCREENSHOT_SAME: GUI'de "DOGRULAMA BASARILI / SAME" çıktısının terminaldeki görüntüsü -->
+<img width="841" height="95" alt="resim" src="https://github.com/user-attachments/assets/c3279403-db5c-4d81-abff-0ccc2c90e4fc" />
+
 
 ---
 
@@ -141,8 +149,8 @@ Uygulama üç sekmeye ayrılmıştır:
 
 > Haber dosyasının içeriği değiştirildiğinde (tek bir karakter bile) hash blokları uyuşmaz ve sistem manipülasyonu tespit eder.
 
-<!-- SCREENSHOT_DIFFERENT: Terminalde veya GUI'de "DOGRULAMA BASARISIZ / DIFFERENT" çıktısının görüntüsü -->
-![Hash Uyuşmazlık - Başarısız](screenshots/hash_different.png)
+<!-- SCREENSHOT_DIFFERENT: GUI'de "DOGRULAMA BASARISIZ / DIFFERENT" çıktısının terminaldeki görüntüsü -->
+<img width="840" height="89" alt="resim" src="https://github.com/user-attachments/assets/858d23ea-6bb1-4431-8d64-3f3181e3bae6" /> 
 
 ---
 
