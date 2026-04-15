@@ -3,10 +3,6 @@
 
 <img width="800" height="476" alt="hashverify github" src="https://github.com/user-attachments/assets/b46b5361-58f0-4021-9714-0bc96edf3060" />
 
-
-SHA-256 tabanlı hashleme ve blok bazlı analiz kullanarak ses kayıtları ile metin dosyalarının bütünlüğünü ve doğruluğunu istemci-sunucu mimarisi üzerinden doğrulayan bir sistemdir. AES-GCM ve RSA ile güvenli veri iletimi sağlanarak, hem biyometrik (ses) hem de içerik (haber) doğrulama süreçleri güvenli ve karşılaştırmalı olarak gerçekleştirilir.
-
-
 **SHA-256 tabanlı haber ve ses bütünlük doğrulama sistemi.**
 
 HashVerify, bir metin haberinin veya ses kaydının orijinalliğini SHA-256 kriptografik hash'leri ve RSA şifreleme kullanarak doğrulayan bir masaüstü güvenlik uygulamasıdır. İçerik bir kez sisteme kaydedilir (enroll); sonraki doğrulama adımında hash'ler karşılaştırılarak manipülasyon anında tespit edilir.
