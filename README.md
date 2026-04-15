@@ -138,7 +138,8 @@ Uygulama üç sekmeye ayrılmıştır:
 > Orijinal haber dosyası sisteme kaydedildikten sonra aynı dosya ile doğrulama yapıldığında tüm hash blokları eşleşir.
 
 <!-- SCREENSHOT_SAME: GUI'de "DOGRULAMA BASARILI / SAME" çıktısının terminaldeki görüntüsü -->
-<img width="841" height="95" alt="resim" src="https://github.com/user-attachments/assets/c3279403-db5c-4d81-abff-0ccc2c90e4fc" />
+<img width="1147" height="132" alt="resim" src="https://github.com/user-attachments/assets/7498bc7f-0e55-48c3-ba23-737c471223f8" />
+
 
 
 ---
